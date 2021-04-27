@@ -5,7 +5,7 @@ function [betas0,rho0,ag0]= abc_hie2(hb,hb_sig,y,e,ini_state,stoi,time,stp1,stp2
 aa=0; %to make sure that you get an accepted particle from the output 
 ag=0; %set the counter
 pd_b = @(f,h) makedist('Normal','mu',f,'sigma',h);
-tpd=@(f,h) truncate(pd_b(f,h),1,10);
+tpd=@(f,h) truncate(pd_b(f,h),0.001,10);
 tpdb=tpd(hb,hb_sig);
  %p1=unifpdf(hb,1,10)*unifpdf(hb_sig,0,2.5);
 %initilise

@@ -18,7 +18,7 @@ dim=size(data,2); %number of pos
 T=size(data,1);
 
 pd_b = @(f,h) makedist('Normal','mu',f,'sigma',h);
-tpd=@(f,h) truncate(pd_b(f,h),1,10);
+tpd=@(f,h) truncate(pd_b(f,h),0.001,10);
 
     %load hyper-parameters 
     hb=load('hb.mat', 'hb');
@@ -51,9 +51,7 @@ eta=1; %number of samples to generate for each parameter set
 
 %store the final smc-proposed parameters and other needed values in a matrix 
 beta_smc=zeros(B,dim);
-w_smc=zeros(B,dim); %weights 
-E_smc=zeros(G+1,dim);%tolerance values 
-AG_smc=zeros(G,dim);%number of steps generated to get B parameters 
+AG_smc=zeros(1,dim);%number of steps generated to get B parameters 
 s_x= zeros(B,dim);%save the distance criteria
 
 for k=1:dim
@@ -68,35 +66,30 @@ for k=1:dim
     e=E(1);
     %E(1)=e;
     %set a counter for number of iterations to run for each gen 
-    AG=zeros(1,G);
+    %AG=zeros(1,G);
 
       
     %store values for the current generation
     betas0=zeros(1,B); %store the cluster based beta values from posterior 
-    w0=zeros(1,B); %store weights 
     ag=0;%set the counter 
     ag0=zeros(1,B);%set the counter 
     rho_m=zeros(1,B);%store the distance values 
 
      parfor a=1:B %particle number     
-     [betas0(a),w0(a),rho_m(a),ag0(a)]=abc_hie2(hb(a),hb_sig(a),y,e,ini_state,stoi,time,stp1,stp2,eta,gamma,epsilon);
+     [betas0(a),rho_m(a),ag0(a)]=abc_hie2(hb(a),hb_sig(a),y,e,ini_state,stoi,time,stp1,stp2,eta,gamma,epsilon);
      end 
         s_xx= rho_m';%save the distance criteria
         betas=betas0; %store the cluster based beta values from posterior 
-        AG(g)=sum(ag0);
+        AG=sum(ag0);
         
 %store the final values of the population k
 beta_smc(:,k)=betas;
-w_smc(:,k)=w; %weights 
-E_smc(:,k)=E;%tolerance values 
-AG_smc(:,k)=AG;%number of steps generated to get B parameters 
+AG_smc(k)=AG;%number of steps generated to get B parameters 
 s_x(:,k)=s_xx;
 end
-save('s_x_smc.mat','s_x');
-save('beta_smc.mat','beta_smc');
-save('E_smc','E_smc');
-save('AG_smc.mat','AG_smc');
-save('w_smc.mat','w_smc');
+save('hie_s_x_smc.mat','s_x');
+save('sc_1_hie_beta_smc.mat','beta_smc');
+save('hie_AG_smc.mat','AG_smc');
 
 toc
 

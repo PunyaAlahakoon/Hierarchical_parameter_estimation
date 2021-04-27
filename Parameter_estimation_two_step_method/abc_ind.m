@@ -17,7 +17,7 @@ rho0=0;
 while(aa<2)
     ag=ag+1;
  if g==1 
-        be=unifrnd(1,10); % sample from prior    
+        be=unifrnd(0.001,10); % sample from prior    
     else    
 
         %find the index to the parameter set to use 
@@ -28,7 +28,7 @@ while(aa<2)
         be=abs(normrnd(be0,ss));
    
  end  
-         p1=unifpdf(be,1,10);
+         p1=unifpdf(be,0.001,10);
          
     if p1>0
                 

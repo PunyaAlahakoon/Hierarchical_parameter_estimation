@@ -56,7 +56,7 @@ for k=1:dim
             %during this perid)
     t_seq=1:T;
     %Store the sets of tolerance values 
-    E=[350 300 270 250 200 170 150 130]; %these are the values used for Pop A
+    E=[350 300 270 250 200 170 150 90]; %these are the values used for Pop A
     %starting tolerance levels for each pop: starting values 
     e=E(1);
     %set a counter for number of iterations to run for each gen 
@@ -97,7 +97,7 @@ AG_smc(:,k)=AG;%number of steps generated to get B parameters
 s_x(:,k)=s_xx;
 end
 save('s_x_smc.mat','s_x');
-save('beta_smc.mat','beta_smc');
+save('ind_beta_smc.mat','beta_smc');
 save('E_smc','E_smc');
 save('AG_smc.mat','AG_smc');
 save('w_smc.mat','w_smc');

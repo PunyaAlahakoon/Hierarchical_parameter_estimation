@@ -27,3 +27,4 @@ std(t_betas)=0.4821 %in the data that were generated
 mean(t_betas)= 2.1805 %in the data that were generated
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+NOTE: sub-pop 16 $\beta$ was also generated similar to that of Scenario 2 above.

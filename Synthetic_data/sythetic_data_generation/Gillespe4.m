@@ -21,7 +21,7 @@ T=[];%store times
   T=[T time];
  
      i=1;
-     while ((~stp1(states(i,:)))|(T<=stp2) )
+     while ((T<=stp2)& (~stp1(states(i,:))))
       
         %calculate rates 
         current_R = zeros(1,n);

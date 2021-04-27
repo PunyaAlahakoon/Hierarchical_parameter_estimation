@@ -26,9 +26,9 @@ p=zeros(1,N); %not a necessary step
 hb(1)= 3;
 hb_sig(1)=0.1;
 %calculate the weight: 
-[w,poste]=weight3(me,hb(1),hb_sig(1));
+[w,poste]=weight3(me,hb(1),hb_sig(1),dim,B);
 poste2=poste;
-p(1)=w*unifpdf(hb(1),1,10)*unifpdf(hb_sig(1),0,2.5);
+p(1)=w*unifpdf(hb(1),0.001,10)*unifpdf(hb_sig(1),0,2.5);
 
 %MCMC 
 for i=2:N
@@ -37,7 +37,7 @@ for i=2:N
    sig_r=abs(normrnd(hb_sig(i-1),0.1));
     
    [w,poste]=weight3(me,hm_r,sig_r,dim,B);
-   prior=unifpdf(hm_r,1,10)*unifpdf(hb_sig(1),0,2.5);
+   prior=unifpdf(hm_r,0.001,10)*unifpdf(hb_sig(1),0,2.5);
    
    p_s=w*prior;
    prop=p_s/p(i-1);
