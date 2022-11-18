@@ -9,7 +9,7 @@
 
 function [betas0,w0,rho0,ag0]= abc_ind(g,B,betas,w,y,e,ini_state,stoi,time,stp1,stp2,eta,gamma,epsilon)
 %model definition 
-aa=0; %to make sure that you get an accepted particle from the output 
+aa=1; %to make sure that you get an accepted particle from the output 
 ag=0; %set the counter
 %initilise
 betas0=0;w0=0;
